@@ -2,7 +2,7 @@ package com.suonk.newsapp.navigation
 
 import androidx.fragment.app.FragmentActivity
 import com.suonk.newsapp.R
-import com.suonk.newsapp.ui.fragments.MainFragment
+import com.suonk.newsapp.ui.fragments.main_pages.MainFragment
 import com.suonk.newsapp.ui.fragments.SplashScreenFragment
 import javax.inject.Inject
 
