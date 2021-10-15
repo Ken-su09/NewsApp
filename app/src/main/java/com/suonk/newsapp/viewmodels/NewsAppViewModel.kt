@@ -18,23 +18,26 @@ class NewsAppViewModel @Inject constructor(private val repository: NewsAppReposi
 
     //region =========================================== Get News ===========================================
 
-    var breakingNewsLiveData = MutableLiveData<NewsResponse>()
     var allNewsLiveData = MutableLiveData<NewsResponse>()
+    var breakingNewsLiveData = MutableLiveData<NewsResponse>()
 
-    fun getBreakingNews(searchQuery: String, countryCode: String, category: String) =
-        viewModelScope.launch(Dispatchers.IO) {
-            val response = repository.getBreakingNews(searchQuery, countryCode, category)
-            if (response.isSuccessful) {
-                breakingNewsLiveData.postValue(response.body())
-            }
-        }
-
-    fun getAllNews(searchQuery: String, language: String, sortBy: String) =
+    fun getAllNews(searchQuery: String?, language: String, sortBy: String) =
         viewModelScope.launch(Dispatchers.IO) {
             val response = repository.getAllNews(searchQuery, language, sortBy)
             if (response.isSuccessful) {
-                Log.i("getAllNews", "${response.body()}")
                 allNewsLiveData.postValue(response.body())
+            }
+        }
+
+    fun getBreakingNews(searchQuery: String?, countryCode: String, category: String) =
+        viewModelScope.launch(Dispatchers.IO) {
+            val response = repository.getBreakingNews(searchQuery, countryCode, category)
+            Log.i("getNews", "getBreakingNews : ${response.isSuccessful}")
+            Log.i("getNews", "getBreakingNews : $response")
+            Log.i("getNews", "getBreakingNews : $searchQuery")
+            if (response.isSuccessful) {
+                Log.i("getNews", "getBreakingNews : ${response.body()}")
+                breakingNewsLiveData.postValue(response.body())
             }
         }
 

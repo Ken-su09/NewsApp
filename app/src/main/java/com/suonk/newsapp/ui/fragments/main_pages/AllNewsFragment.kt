@@ -30,7 +30,7 @@ class AllNewsFragment : Fragment() {
     private lateinit var contextActivity: MainActivity
     private lateinit var sharedPref: SharedPreferences
 
-    private var searchQuery = ""
+    private var searchQuery: String? = ""
     private var sortBy = ""
 
     //endregion
@@ -58,9 +58,6 @@ class AllNewsFragment : Fragment() {
     private fun initRecyclerView() {
         binding?.newsRecyclerView?.apply {
             this.adapter = newsListAdapter
-            if (sortBy == "") {
-                sortBy = "publishedAt"
-            }
             if (searchQuery == "") {
                 searchQuery = "bitcoin"
             }
@@ -73,7 +70,9 @@ class AllNewsFragment : Fragment() {
     private fun observeSearchBarTextFromMainFragment() {
         viewModel.searchBarText.observe(viewLifecycleOwner, { searchBarText ->
             searchQuery = searchBarText
-            Log.i("parameters", searchQuery)
+            if (searchQuery == "") {
+                searchQuery = "bitcoin"
+            }
             getAllNews(searchQuery, sortBy)
         })
     }
@@ -94,7 +93,7 @@ class AllNewsFragment : Fragment() {
 
     //region ========================================== GetAllNews ==========================================
 
-    private fun getAllNews(searchQuery: String, sortBy: String) {
+    private fun getAllNews(searchQuery: String?, sortBy: String) {
         val language = Resources.getSystem().configuration.locale.language
         viewModel.getAllNews(searchQuery, language, sortBy)
 

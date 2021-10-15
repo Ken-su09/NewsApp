@@ -15,7 +15,7 @@ interface NewsApiService {
     @GET("v2/everything")
     suspend fun getAllNews(
         @Query("q")
-        searchQuery: String,
+        searchQuery: String?,
         @Query("language")
         language: String,
         @Query("sortBy")
@@ -27,7 +27,7 @@ interface NewsApiService {
     @GET("v2/top-headlines")
     suspend fun getBreakingNews(
         @Query("q")
-        searchQuery: String,
+        searchQuery: String?,
         @Query("country")
         countryCode: String,
         @Query("category")
