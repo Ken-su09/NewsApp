@@ -1,5 +1,7 @@
 package com.suonk.newsapp.ui.fragments.main_pages
 
+import android.content.Context
+import android.content.SharedPreferences
 import android.content.res.Resources
 import android.os.Bundle
 import android.util.Log
@@ -14,7 +16,6 @@ import com.suonk.newsapp.ui.activity.MainActivity
 import com.suonk.newsapp.ui.adapters.NewsListAdapter
 import com.suonk.newsapp.viewmodels.NewsAppViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import java.util.*
 
 @AndroidEntryPoint
 class AllNewsFragment : Fragment() {
@@ -26,6 +27,8 @@ class AllNewsFragment : Fragment() {
     private lateinit var newsListAdapter: NewsListAdapter
 
     private val viewModel: NewsAppViewModel by activityViewModels()
+    private lateinit var contextActivity: MainActivity
+    private lateinit var sharedPref: SharedPreferences
 
     private var searchQuery = ""
     private var sortBy = ""
@@ -44,8 +47,10 @@ class AllNewsFragment : Fragment() {
     //region ============================================== UI ==============================================
 
     private fun initializeUI() {
-        newsListAdapter = NewsListAdapter(activity as MainActivity)
-        observeSearchBarFromMainFragment()
+        contextActivity = activity as MainActivity
+        newsListAdapter = NewsListAdapter(contextActivity)
+        getDataFromSharedPreferences()
+        observeSearchBarTextFromMainFragment()
         observeToolbarSortByFromMainFragment()
         initRecyclerView()
     }
@@ -61,20 +66,28 @@ class AllNewsFragment : Fragment() {
             }
             getAllNews(searchQuery, sortBy)
             setHasFixedSize(true)
-            layoutManager = LinearLayoutManager(activity as MainActivity)
+            layoutManager = LinearLayoutManager(contextActivity)
         }
     }
 
-    private fun observeSearchBarFromMainFragment() {
+    private fun observeSearchBarTextFromMainFragment() {
         viewModel.searchBarText.observe(viewLifecycleOwner, { searchBarText ->
             searchQuery = searchBarText
+            Log.i("parameters", searchQuery)
+            getAllNews(searchQuery, sortBy)
         })
     }
 
     private fun observeToolbarSortByFromMainFragment() {
         viewModel.toolbarSortBy.observe(viewLifecycleOwner, { toolbarSortBy ->
             sortBy = toolbarSortBy
+            getAllNews(searchQuery, sortBy)
         })
+    }
+
+    private fun getDataFromSharedPreferences() {
+        sharedPref = contextActivity.getSharedPreferences("news_sort_by", Context.MODE_PRIVATE)
+        sortBy = sharedPref.getString("news_sort_by", "publishedAt")!!
     }
 
     //endregion

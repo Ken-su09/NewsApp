@@ -1,8 +1,11 @@
 package com.suonk.newsapp.ui.fragments.main_pages
 
+import android.content.Context
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -25,6 +28,9 @@ class MainFragment : Fragment() {
     private var binding: FragmentMainBinding? = null
     private val viewModel: NewsAppViewModel by activityViewModels()
 
+    private lateinit var sharedPref: SharedPreferences
+    private lateinit var contextActivity: MainActivity
+
     //endregion
 
     override fun onCreateView(
@@ -39,6 +45,7 @@ class MainFragment : Fragment() {
     //region ============================================== UI ==============================================
 
     private fun initializeUI() {
+        contextActivity = activity as MainActivity
         initToolbar()
         setupViewPager()
     }
@@ -72,20 +79,34 @@ class MainFragment : Fragment() {
                 null
             )
 
+            getDataFromSharedPreferences()
+
             setOnMenuItemClickListener { menuItem ->
                 when (menuItem.itemId) {
                     R.id.publishedAt -> {
+                        Log.i("news_sort_by", "publishedAt")
                         viewModel.setToolbarSortBy("publishedAt")
+                        val edit = sharedPref.edit()
+                        edit.putString("news_sort_by", "publishedAt")
+                        edit.apply()
                         menuItem.isChecked = true
                         true
                     }
                     R.id.relevancy -> {
+                        Log.i("news_sort_by", "relevancy")
                         viewModel.setToolbarSortBy("relevancy")
+                        val edit = sharedPref.edit()
+                        edit.putString("news_sort_by", "relevancy")
+                        edit.apply()
                         menuItem.isChecked = true
                         true
                     }
                     R.id.popularity -> {
+                        Log.i("news_sort_by", "popularity")
                         viewModel.setToolbarSortBy("popularity")
+                        val edit = sharedPref.edit()
+                        edit.putString("news_sort_by", "popularity")
+                        edit.apply()
                         menuItem.isChecked = true
                         true
                     }
@@ -112,6 +133,22 @@ class MainFragment : Fragment() {
             override fun afterTextChanged(p0: Editable?) {
             }
         })
+    }
+
+    private fun getDataFromSharedPreferences() {
+        sharedPref = contextActivity.getSharedPreferences("news_sort_by", Context.MODE_PRIVATE)
+
+        when (sharedPref.getString("news_sort_by", "publishedAt")) {
+            "publishedAt" -> {
+                binding?.toolbar?.menu?.getItem(0)?.isChecked = true
+            }
+            "relevancy" -> {
+                binding?.toolbar?.menu?.getItem(1)?.isChecked = true
+            }
+            "popularity" -> {
+                binding?.toolbar?.menu?.getItem(2)?.isChecked = true
+            }
+        }
     }
 
     //endregion

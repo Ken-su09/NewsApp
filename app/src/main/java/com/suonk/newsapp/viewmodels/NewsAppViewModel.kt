@@ -33,7 +33,6 @@ class NewsAppViewModel @Inject constructor(private val repository: NewsAppReposi
         viewModelScope.launch(Dispatchers.IO) {
             val response = repository.getAllNews(searchQuery, language, sortBy)
             if (response.isSuccessful) {
-                delay(5000)
                 Log.i("getAllNews", "${response.body()}")
                 allNewsLiveData.postValue(response.body())
             }
