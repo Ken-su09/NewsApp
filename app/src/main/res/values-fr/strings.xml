@@ -3,4 +3,6 @@
     <string name="published_at">Plus récent</string>
     <string name="relevancy">Plus pertinent</string>
     <string name="popularity">Plus populaire</string>
+    <string name="author">Auteur : </string>
+    <string name="link">Source : </string>
 </resources>

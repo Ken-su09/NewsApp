@@ -12,6 +12,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.suonk.newsapp.databinding.FragmentBreakingNewsBinding
+import com.suonk.newsapp.models.data.Article
 import com.suonk.newsapp.ui.activity.MainActivity
 import com.suonk.newsapp.ui.adapters.NewsListAdapter
 import com.suonk.newsapp.viewmodels.NewsAppViewModel
@@ -28,7 +29,6 @@ class BreakingNewsFragment : Fragment() {
 
     private val viewModel: NewsAppViewModel by activityViewModels()
     private lateinit var contextActivity: MainActivity
-    private lateinit var sharedPref: SharedPreferences
 
     private var searchQuery: String? = ""
     private var category = "general"
@@ -94,8 +94,12 @@ class BreakingNewsFragment : Fragment() {
     //region ======================================= GetBreakingNews ========================================
 
     private fun getBreakingNews(searchQuery: String?, category: String) {
-        val language = Resources.getSystem().configuration.locale.language
-        viewModel.getBreakingNews(searchQuery, "fr", category)
+        val countryCode = when (Resources.getSystem().configuration.locale.language) {
+            "fr" -> "fr"
+            "en" -> "us"
+            else -> "fr"
+        }
+        viewModel.getBreakingNews(searchQuery, countryCode, category)
 
         viewModel.breakingNewsLiveData.observe(viewLifecycleOwner, { newsResponse ->
             newsListAdapter.submitList(null)

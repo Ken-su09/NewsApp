@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.suonk.newsapp.databinding.FragmentAllNewsBinding
+import com.suonk.newsapp.models.data.Article
 import com.suonk.newsapp.ui.activity.MainActivity
 import com.suonk.newsapp.ui.adapters.NewsListAdapter
 import com.suonk.newsapp.viewmodels.NewsAppViewModel

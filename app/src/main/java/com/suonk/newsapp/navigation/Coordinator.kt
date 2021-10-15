@@ -9,4 +9,8 @@ class Coordinator(private val navigator: Navigator) {
     fun showMainScreen() {
         navigator.showMainScreen()
     }
+
+    fun showNewsDetails() {
+        navigator.showNewsDetails()
+    }
 }

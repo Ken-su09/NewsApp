@@ -4,6 +4,7 @@ import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.suonk.newsapp.models.data.Article
 import com.suonk.newsapp.models.data.NewsResponse
 import com.suonk.newsapp.repositories.NewsAppRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -44,6 +45,11 @@ class NewsAppViewModel @Inject constructor(private val repository: NewsAppReposi
     //endregion
 
     //region ==================================== Data Between Fragments ====================================
+
+    val article = MutableLiveData<Article>()
+    fun setArticle(a: Article) {
+        article.value = a
+    }
 
     val searchBarText = MutableLiveData<String>()
     fun setSearchBarText(text: String) {

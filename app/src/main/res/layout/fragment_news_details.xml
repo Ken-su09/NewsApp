@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/custom_background"
+    tools:context=".ui.fragments.NewsDetailsFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/back_to_news_list"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="15dp"
+            android:src="@drawable/ic_left_arrow"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/share_news"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="15dp"
+            android:src="@drawable/ic_share"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/news_image"
+            android:layout_width="0dp"
+            android:layout_height="200dp"
+            android:layout_margin="20dp"
+            android:src="@drawable/ic_app_logo"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/back_to_news_list" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/news_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/news_image"
+            tools:text="Contact Lost With Sriwijaya Air Boeing 737-500 After Take Off" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/news_author_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="@string/author"
+            android:textColor="@color/white"
+            android:textSize="15sp"
+            app:layout_constraintStart_toStartOf="@+id/news_title"
+            app:layout_constraintTop_toBottomOf="@+id/news_title" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/news_author_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            android:layout_marginStart="5dp"
+            app:layout_constraintBottom_toBottomOf="@+id/news_author_title"
+            app:layout_constraintStart_toEndOf="@+id/news_author_title"
+            app:layout_constraintTop_toTopOf="@+id/news_author_title"
+            tools:text="John Smith" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/news_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/lightGrey"
+            android:textSize="15sp"
+            android:textStyle="italic"
+            app:layout_constraintBottom_toBottomOf="@+id/news_author_title"
+            app:layout_constraintEnd_toEndOf="@+id/news_title"
+            app:layout_constraintTop_toTopOf="@+id/news_author_title"
+            tools:text="Date" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/news_content"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/news_author_title"
+            tools:text="Le président de la République doit présenter jeudi 14 octobre, lors d’un déplacement en Seine-Saint-Denis lié à la tenue des Jeux olympiques et paralympiques à Paris en 2024, un plan de 250 millions d’euros sur trois ans pour favoriser la pratique sportive." />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/news_link_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="@string/link"
+            android:textColor="@color/white"
+            android:textSize="15sp"
+            app:layout_constraintStart_toStartOf="@+id/news_content"
+            app:layout_constraintTop_toBottomOf="@+id/news_content" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/news_link_value"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:autoLink="web"
+            android:clickable="true"
+            android:focusable="true"
+            android:maxLines="1"
+            android:layout_marginStart="5dp"
+            android:textColor="@color/white"
+            android:textSize="15sp"
+            app:layout_constraintBottom_toBottomOf="@+id/news_link_title"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/news_link_title"
+            app:layout_constraintTop_toTopOf="@+id/news_link_title"
+            tools:text="https://www.lemonde.fr/sport/article/2021/10/13/paris-2024-emmanuel-macron-veut-construire-5-000-terrains-de-sport-de-proximite-avant-les-jo_6098261_3242.html" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>
